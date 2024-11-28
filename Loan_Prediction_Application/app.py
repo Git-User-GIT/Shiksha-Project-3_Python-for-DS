@@ -29,7 +29,7 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        cursor.execute("INSERT INTO User (username, password) VALUES (%s, %s)", (username, password))
+        cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, password))
         db.commit()
         return redirect('/login')
     return render_template('register.html')
@@ -77,7 +77,7 @@ def predict():
 
         # Predict loan eligibility
         prediction = model.predict([data])[0]
-        result = "Eligible" if prediction == 1 else "Not Eligible"
+        result = "Congrats!! you are Eligible for the loan" if prediction == 1 else "Sorry Not Eligible"
 
         # Render the result page
         return render_template('predict.html', result=result, data=request.form)
